@@ -1,0 +1,53 @@
+/*
+ * Copyright 2018 cxx
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package cc.colorcat.netbird;
+
+/**
+ * Author: cxx
+ * Date: 2018-8-17
+ * GitHub: https://github.com/ccolorcat
+ */
+public abstract class Platform {
+    static volatile Platform instance;
+
+    public static Platform get() {
+        if (instance == null) {
+            synchronized (Platform.class) {
+                if (instance == null) {
+                    Platform.instance = findPlatform();
+                }
+            }
+        }
+        return instance;
+    }
+
+    private static Platform findPlatform() {
+        try {
+            Class<?> clazz = Class.forName("cc.colorcat.netbird4.android.AndroidPlatform");
+            return (Platform) clazz.newInstance();
+        } catch (Exception e) {
+            Log.e(e);
+        }
+        return new GenericPlatform();
+    }
+
+    public abstract Connection connection();
+
+    public abstract Scheduler scheduler();
+
+    public abstract Logger logger();
+}

@@ -19,7 +19,6 @@ package cc.colorcat.netbird;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -111,13 +110,15 @@ public class Parameters implements PairReader {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+
         Parameters that = (Parameters) o;
-        return Objects.equals(delegate, that.delegate);
+
+        return delegate.equals(that.delegate);
     }
 
     @Override
     public int hashCode() {
-        return 23 * Objects.hash(delegate);
+        return 23 * delegate.hashCode();
     }
 
     @Override

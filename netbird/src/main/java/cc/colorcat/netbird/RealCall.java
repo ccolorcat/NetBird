@@ -19,7 +19,6 @@ package cc.colorcat.netbird;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
@@ -100,15 +99,20 @@ final class RealCall implements Call {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+
         RealCall realCall = (RealCall) o;
-        return Objects.equals(request, realCall.request) &&
-                Objects.equals(executed, realCall.executed) &&
-                Objects.equals(canceled, realCall.canceled);
+
+        if (!request.equals(realCall.request)) return false;
+        if (!executed.equals(realCall.executed)) return false;
+        return canceled.equals(realCall.canceled);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(request, executed, canceled);
+        int result = request.hashCode();
+        result = 31 * result + executed.hashCode();
+        result = 31 * result + canceled.hashCode();
+        return result;
     }
 
     @Override
@@ -172,21 +176,23 @@ final class RealCall implements Call {
         public boolean equals(Object o) {
             if (this == o) return true;
             if (o == null || getClass() != o.getClass()) return false;
+
             AsyncCall asyncCall = (AsyncCall) o;
-            return Objects.equals(RealCall.this, asyncCall.get()) &&
-                    Objects.equals(callback, asyncCall.callback);
+
+            if (!RealCall.this.equals(asyncCall.get())) return false;
+            return callback.equals(asyncCall.callback);
         }
 
         @Override
         public int hashCode() {
-            return Objects.hash(RealCall.this, callback);
+            return RealCall.this.hashCode() + 31 * callback.hashCode();
         }
 
         @Override
         public String toString() {
             return "AsyncCall{" +
-                    "Call=" + RealCall.this +
-                    "callback=" + callback +
+                    "call=" + RealCall.this +
+                    ", callback=" + callback +
                     '}';
         }
     }

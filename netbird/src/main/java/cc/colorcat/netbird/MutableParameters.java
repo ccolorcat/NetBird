@@ -19,7 +19,6 @@ package cc.colorcat.netbird;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * Author: cxx
@@ -99,13 +98,15 @@ public final class MutableParameters extends Parameters implements PairWriter {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+
         MutableParameters that = (MutableParameters) o;
-        return Objects.equals(delegate, that.delegate);
+
+        return delegate.equals(that.delegate);
     }
 
     @Override
     public int hashCode() {
-        return 31 * Objects.hash(delegate);
+        return 31 * delegate.hashCode();
     }
 
     private static void checkNameAndValue(String name, String value) {

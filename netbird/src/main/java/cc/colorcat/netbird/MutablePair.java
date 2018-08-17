@@ -20,7 +20,6 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * Author: cxx
@@ -94,15 +93,20 @@ final class MutablePair extends Pair implements PairWriter {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        MutablePair pair = (MutablePair) o;
-        return Objects.equals(names, pair.names) &&
-                Objects.equals(values, pair.values) &&
-                Objects.equals(comparator, pair.comparator);
+
+        MutablePair that = (MutablePair) o;
+
+        if (!names.equals(that.names)) return false;
+        if (!values.equals(that.values)) return false;
+        return comparator.equals(that.comparator);
     }
 
     @Override
     public int hashCode() {
-        return 17 * Objects.hash(names, values, comparator);
+        int result = names.hashCode();
+        result = 31 * result + values.hashCode();
+        result = 31 * result + comparator.hashCode();
+        return 17 * result;
     }
 
 

@@ -19,7 +19,6 @@ package cc.colorcat.netbird;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * Author: cxx
@@ -114,21 +113,33 @@ public class Request {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+
         Request request = (Request) o;
-        return Objects.equals(boundary, request.boundary) &&
-                Objects.equals(url, request.url) &&
-                Objects.equals(path, request.path) &&
-                method == request.method &&
-                Objects.equals(parameters, request.parameters) &&
-                Objects.equals(fileBodies, request.fileBodies) &&
-                Objects.equals(headers, request.headers) &&
-                Objects.equals(downloadListener, request.downloadListener) &&
-                Objects.equals(tag, request.tag);
+
+        if (!boundary.equals(request.boundary)) return false;
+        if (!url.equals(request.url)) return false;
+        if (!path.equals(request.path)) return false;
+        if (method != request.method) return false;
+        if (!parameters.equals(request.parameters)) return false;
+        if (!fileBodies.equals(request.fileBodies)) return false;
+        if (!headers.equals(request.headers)) return false;
+        if (downloadListener != null ? !downloadListener.equals(request.downloadListener) : request.downloadListener != null)
+            return false;
+        return tag.equals(request.tag);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(url, path, method, parameters, fileBodies, headers, downloadListener, boundary, tag);
+        int result = url.hashCode();
+        result = 31 * result + path.hashCode();
+        result = 31 * result + method.hashCode();
+        result = 31 * result + parameters.hashCode();
+        result = 31 * result + fileBodies.hashCode();
+        result = 31 * result + headers.hashCode();
+        result = 31 * result + (downloadListener != null ? downloadListener.hashCode() : 0);
+        result = 31 * result + boundary.hashCode();
+        result = 31 * result + tag.hashCode();
+        return result;
     }
 
     @Override

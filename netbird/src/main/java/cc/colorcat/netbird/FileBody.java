@@ -20,7 +20,6 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.Objects;
 
 /**
  * Author: cxx
@@ -72,16 +71,22 @@ public final class FileBody extends RequestBody {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+
         FileBody fileBody = (FileBody) o;
-        return Objects.equals(name, fileBody.name) &&
-                Objects.equals(contentType, fileBody.contentType) &&
-                Objects.equals(file, fileBody.file) &&
-                Objects.equals(listener, fileBody.listener);
+
+        if (!name.equals(fileBody.name)) return false;
+        if (!contentType.equals(fileBody.contentType)) return false;
+        if (!file.equals(fileBody.file)) return false;
+        return listener != null ? listener.equals(fileBody.listener) : fileBody.listener == null;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, contentType, file, listener);
+        int result = name.hashCode();
+        result = 31 * result + contentType.hashCode();
+        result = 31 * result + file.hashCode();
+        result = 31 * result + (listener != null ? listener.hashCode() : 0);
+        return result;
     }
 
     @Override

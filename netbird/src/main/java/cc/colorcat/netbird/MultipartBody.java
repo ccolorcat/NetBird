@@ -20,7 +20,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * Author: cxx
@@ -144,15 +143,20 @@ final class MultipartBody extends RequestBody {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+
         MultipartBody that = (MultipartBody) o;
-        return Objects.equals(formBody, that.formBody) &&
-                Objects.equals(fileBodies, that.fileBodies) &&
-                Objects.equals(boundary, that.boundary);
+
+        if (!boundary.equals(that.boundary)) return false;
+        if (!formBody.equals(that.formBody)) return false;
+        return fileBodies.equals(that.fileBodies);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(formBody, fileBodies, boundary);
+        int result = formBody.hashCode();
+        result = 31 * result + fileBodies.hashCode();
+        result = 31 * result + boundary.hashCode();
+        return result;
     }
 
     @Override

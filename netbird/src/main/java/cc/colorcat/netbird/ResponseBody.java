@@ -101,9 +101,7 @@ public abstract class ResponseBody implements Closeable {
     }
 
     public static ResponseBody create(final InputStream input, final String contentType, final long contentLength, final Charset charset) {
-        if (input == null) {
-            throw new IllegalArgumentException("input == null");
-        }
+        if (input == null) throw new IllegalArgumentException("input == null");
         if (contentLength < -1L) throw new IllegalArgumentException("contentLength < -1L");
         return new ResponseBody() {
             @Override

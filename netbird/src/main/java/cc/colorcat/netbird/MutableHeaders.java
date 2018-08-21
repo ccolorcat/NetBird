@@ -18,7 +18,6 @@ package cc.colorcat.netbird;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * Author: cxx
@@ -97,14 +96,17 @@ public final class MutableHeaders extends Headers implements PairWriter {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+
         MutableHeaders that = (MutableHeaders) o;
-        return Objects.equals(delegate, that.delegate);
+
+        return delegate.equals(that.delegate);
     }
 
     @Override
     public int hashCode() {
-        return 19 * Objects.hash(delegate);
+        return 19 * delegate.hashCode();
     }
+
 
     private static void checkNameAndValue(String name, String value) {
         if (name == null) throw new NullPointerException("name == null");

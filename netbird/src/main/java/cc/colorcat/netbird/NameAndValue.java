@@ -16,8 +16,6 @@
 
 package cc.colorcat.netbird;
 
-import java.util.Objects;
-
 /**
  * Author: cxx
  * Date: 2018-8-17
@@ -36,14 +34,18 @@ public final class NameAndValue {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+
         NameAndValue that = (NameAndValue) o;
-        return Objects.equals(name, that.name) &&
-                Objects.equals(value, that.value);
+
+        if (name != null ? !name.equals(that.name) : that.name != null) return false;
+        return value != null ? value.equals(that.value) : that.value == null;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, value);
+        int result = name != null ? name.hashCode() : 0;
+        result = 31 * result + (value != null ? value.hashCode() : 0);
+        return result;
     }
 
     @Override

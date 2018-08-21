@@ -23,7 +23,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -156,15 +155,20 @@ class Pair implements PairReader {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Pair pair = (Pair) o;
-        return Objects.equals(names, pair.names) &&
-                Objects.equals(values, pair.values) &&
-                Objects.equals(comparator, pair.comparator);
+
+        Pair that = (Pair) o;
+
+        if (!names.equals(that.names)) return false;
+        if (!values.equals(that.values)) return false;
+        return comparator.equals(that.comparator);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(names, values, comparator);
+        int result = names.hashCode();
+        result = 31 * result + values.hashCode();
+        result = 31 * result + comparator.hashCode();
+        return result;
     }
 
     @Override

@@ -16,8 +16,6 @@
 
 package cc.colorcat.netbird;
 
-import java.util.Objects;
-
 /**
  * Author: cxx
  * Date: 2018-8-17
@@ -51,15 +49,20 @@ public final class NetworkData<T> {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+
         NetworkData<?> that = (NetworkData<?>) o;
-        return code == that.code &&
-                Objects.equals(msg, that.msg) &&
-                Objects.equals(data, that.data);
+
+        if (code != that.code) return false;
+        if (!msg.equals(that.msg)) return false;
+        return data != null ? data.equals(that.data) : that.data == null;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(code, msg, data);
+        int result = code;
+        result = 31 * result + msg.hashCode();
+        result = 31 * result + (data != null ? data.hashCode() : 0);
+        return result;
     }
 
     @Override

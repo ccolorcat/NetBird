@@ -19,7 +19,6 @@ package cc.colorcat.netbird;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.util.Objects;
 
 /**
  * Author: cxx
@@ -91,13 +90,15 @@ final class FormBody extends RequestBody {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+
         FormBody formBody = (FormBody) o;
-        return Objects.equals(parameters, formBody.parameters);
+
+        return parameters.equals(formBody.parameters);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(parameters);
+        return parameters.hashCode();
     }
 
     @Override

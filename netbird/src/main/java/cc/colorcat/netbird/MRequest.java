@@ -18,7 +18,6 @@ package cc.colorcat.netbird;
 
 import java.io.File;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * Author: cxx
@@ -53,21 +52,45 @@ public final class MRequest<T> extends Request {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
-        MRequest<?> mRequest = (MRequest<?>) o;
-        return Objects.equals(parser, mRequest.parser) &&
-                Objects.equals(listener, mRequest.listener);
+
+        MRequest request = (MRequest) o;
+
+        if (!boundary.equals(request.boundary)) return false;
+        if (!url.equals(request.url)) return false;
+        if (!path.equals(request.path)) return false;
+        if (method != request.method) return false;
+        if (!parameters.equals(request.parameters)) return false;
+        if (!fileBodies.equals(request.fileBodies)) return false;
+        if (!headers.equals(request.headers)) return false;
+        if (downloadListener != null ? !downloadListener.equals(request.downloadListener) : request.downloadListener != null)
+            return false;
+        if (!tag.equals(request.tag)) return false;
+        if (!parser.equals(request.parser)) return false;
+        return listener != null ? listener.equals(request.listener) : request.listener == null;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), parser, listener);
+        int result = url.hashCode();
+        result = 31 * result + path.hashCode();
+        result = 31 * result + method.hashCode();
+        result = 31 * result + parameters.hashCode();
+        result = 31 * result + fileBodies.hashCode();
+        result = 31 * result + headers.hashCode();
+        result = 31 * result + (downloadListener != null ? downloadListener.hashCode() : 0);
+        result = 31 * result + boundary.hashCode();
+        result = 31 * result + tag.hashCode();
+        result = 31 * result + parser.hashCode();
+        result = 31 * result + (listener != null ? listener.hashCode() : 0);
+        return result;
     }
 
     @Override
     public String toString() {
         return "MRequest{" +
-                "url='" + url + '\'' +
+                "parser=" + parser +
+                ", listener=" + listener +
+                ", url='" + url + '\'' +
                 ", path='" + path + '\'' +
                 ", method=" + method +
                 ", parameters=" + parameters +
@@ -76,8 +99,7 @@ public final class MRequest<T> extends Request {
                 ", downloadListener=" + downloadListener +
                 ", boundary='" + boundary + '\'' +
                 ", tag=" + tag +
-                ", parser=" + parser +
-                ", listener=" + listener +
+                ", freeze=" + freeze +
                 '}';
     }
 

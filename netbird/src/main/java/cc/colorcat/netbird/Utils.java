@@ -109,7 +109,7 @@ final class Utils {
     static void justDump(InputStream input, OutputStream output) throws IOException {
         BufferedInputStream bis = buffered(input);
         BufferedOutputStream bos = buffered(output);
-        byte[] buffer = new byte[2048];
+        byte[] buffer = new byte[8192];
         for (int length = bis.read(buffer); length != -1; length = bis.read(buffer)) {
             bos.write(buffer, 0, length);
         }
@@ -185,7 +185,7 @@ final class Utils {
     static String justRead(Reader reader) throws IOException {
         StringBuilder builder = new StringBuilder();
         BufferedReader br = new BufferedReader(reader);
-        char[] buffer = new char[2048];
+        char[] buffer = new char[4096];
         for (int length = br.read(buffer); length != -1; length = br.read(buffer)) {
             builder.append(buffer, 0, length);
         }
@@ -195,7 +195,7 @@ final class Utils {
     static byte[] justRead(InputStream input) throws IOException {
         BufferedInputStream bis = buffered(input);
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
-        byte[] buffer = new byte[2048];
+        byte[] buffer = new byte[8192];
         for (int length = bis.read(buffer); length != -1; length = bis.read(buffer)) {
             bos.write(buffer, 0, length);
         }

@@ -33,6 +33,9 @@ public abstract class ResponseBody implements Closeable {
 
     public abstract String contentType();
 
+    /**
+     * @return The number of bytes in that will returned by {@link #bytes()} or -1L if unknown.
+     */
     public abstract long contentLength();
 
     public abstract Charset charset();

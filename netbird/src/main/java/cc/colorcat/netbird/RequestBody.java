@@ -28,6 +28,9 @@ public abstract class RequestBody {
 
     public abstract String contentType();
 
+    /**
+     * @return The number of bytes that will be written to {@code output} in a call to {@link #writeTo}, or -1L if unknown.
+     */
     public long contentLength() throws IOException {
         return -1L;
     }

@@ -86,6 +86,6 @@ final class GenericLogger implements Logger {
         if (value == java.util.logging.Level.SEVERE.intValue()) {
             return Level.ERROR;
         }
-        throw new IllegalArgumentException("un supported level = " + level);
+        throw new IllegalArgumentException("unsupported level = " + level);
     }
 }

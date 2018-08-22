@@ -40,7 +40,7 @@ public final class MutableParameters extends Parameters implements PairWriter {
     };
 
 
-    MutableParameters(Pair delegate) {
+    MutableParameters(MutablePair delegate) {
         super(delegate);
     }
 

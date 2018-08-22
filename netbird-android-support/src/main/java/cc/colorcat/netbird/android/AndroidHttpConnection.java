@@ -31,6 +31,7 @@ import cc.colorcat.netbird.HttpConnection;
  */
 final class AndroidHttpConnection extends HttpConnection {
 
+    @SuppressWarnings("CloneDoesntCallSuperClone")
     @Override
     public Connection clone() {
         return new AndroidHttpConnection();

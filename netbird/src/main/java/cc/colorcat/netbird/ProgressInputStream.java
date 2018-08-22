@@ -41,8 +41,8 @@ final class ProgressInputStream extends FilterInputStream {
     }
 
 
-    private long contentLength;
-    private ProgressListener listener;
+    private final long contentLength;
+    private final ProgressListener listener;
 
     private ProgressInputStream(InputStream in, long contentLength, ProgressListener listener) {
         super(in);
@@ -74,12 +74,11 @@ final class ProgressInputStream extends FilterInputStream {
     }
 
     private long finished = 0L;
-    private int currentPercent = 0;
-    private int lastPercent = currentPercent;
+    private int lastPercent = 0;
 
     private void updateProgress(int readCount) {
         finished += readCount;
-        currentPercent = (int) (finished * 100L / contentLength);
+        int currentPercent = (int) (finished * 100L / contentLength);
         if (currentPercent > lastPercent) {
             lastPercent = currentPercent;
             listener.onChanged(finished, contentLength, currentPercent);

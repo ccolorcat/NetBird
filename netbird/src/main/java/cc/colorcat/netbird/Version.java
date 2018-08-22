@@ -24,7 +24,7 @@ package cc.colorcat.netbird;
 final class Version {
 
     static String userAgent() {
-        return "NetBird/5.0.0";
+        return "NetBird/4.0.1";
     }
 
     private Version() {

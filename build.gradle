@@ -8,6 +8,8 @@ buildscript {
 
     dependencies {
         classpath 'com.android.tools.build:gradle:3.1.4'
+        // jitPack
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:1.5'
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -23,4 +25,31 @@ allprojects {
 
 task clean(type: Delete) {
     delete rootProject.buildDir
+}
+
+project.ext {
+    javaVersionSource = JavaVersion.VERSION_1_7
+    javaVersionTarget = JavaVersion.VERSION_1_7
+
+    jitPackGroup = 'com.github.ccolorcat'
+
+    def sdkVersion = 27
+    def supportVersion = "27.1.1"
+
+    // android
+    compileSdkVersion = sdkVersion
+
+    // android.defaultConfig
+    minSdkVersion = 15
+    targetSdkVersion = sdkVersion
+    versionCode = 5
+    versionName = "4.0.1"
+
+    // dependencies
+    supportAppcompat = "com.android.support:appcompat-v7:${supportVersion}"
+    supportDesign = "com.android.support:design:${supportVersion}"
+    supportV4 = "com.android.support:support-v4:${supportVersion}"
+    testRunner = "com.android.support.test:runner:1.0.2"
+    testEspresso = 'com.android.support.test.espresso:espresso-core:3.0.2'
+    junit = 'junit:junit:4.12'
 }

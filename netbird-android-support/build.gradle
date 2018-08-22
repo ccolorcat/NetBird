@@ -50,6 +50,7 @@ dependencies {
     androidTestImplementation rootProject.ext.testRunner
     androidTestImplementation rootProject.ext.testEspresso
     testImplementation rootProject.ext.junit
+    implementation project(':netbird')
 }
 
 tasks.withType(JavaCompile) {

@@ -28,8 +28,11 @@ task clean(type: Delete) {
 }
 
 project.ext {
-    javaVersionSource = JavaVersion.VERSION_1_7
-    javaVersionTarget = JavaVersion.VERSION_1_7
+    androidJavaSource = JavaVersion.VERSION_1_7
+    androidJavaTarget = JavaVersion.VERSION_1_7
+
+    javaSource = "1.7"
+    javaTarget = "1.7"
 
     jitPackGroup = 'com.github.ccolorcat'
 

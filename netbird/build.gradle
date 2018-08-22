@@ -28,8 +28,8 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 }
 
-sourceCompatibility = "1.7"
-targetCompatibility = "1.7"
+sourceCompatibility = rootProject.ext.javaSource
+targetCompatibility = rootProject.ext.javaTarget
 
 tasks.withType(JavaCompile) {
     options.encoding = "UTF-8"

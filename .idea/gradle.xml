@@ -13,6 +13,7 @@
             <option value="$PROJECT_DIR$/netbird-android-support" />
             <option value="$PROJECT_DIR$/netbird-cache-support" />
             <option value="$PROJECT_DIR$/netbird-gson-parser" />
+            <option value="$PROJECT_DIR$/netbird-jackson-parser" />
             <option value="$PROJECT_DIR$/netbird-logging-support" />
           </set>
         </option>

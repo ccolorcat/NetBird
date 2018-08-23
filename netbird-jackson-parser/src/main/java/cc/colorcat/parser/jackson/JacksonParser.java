@@ -14,11 +14,10 @@
  * limitations under the License.
  */
 
-package cc.colorcat.parser.gson;
+package cc.colorcat.parser.jackson;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.internal.$Gson$Types;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.type.TypeFactory;
 
 import java.io.IOException;
 import java.io.Reader;
@@ -30,22 +29,22 @@ import cc.colorcat.netbird.StateIOException;
 
 /**
  * Author: cxx
- * Date: 2018-08-22
+ * Date: 2018-08-23
  * GitHub: https://github.com/ccolorcat
  */
-public abstract class GsonParser<T> extends JsonParser<T> {
-    private static Gson gson = new GsonBuilder().create();
+public abstract class JacksonParser<T> extends JsonParser<T> {
+    private static ObjectMapper mapper = new ObjectMapper();
 
-    public static void setGson(Gson gson) {
-        if (gson == null) throw new IllegalArgumentException("gson == null");
-        GsonParser.gson = gson;
+    public static void setObjectMapper(ObjectMapper mapper) {
+        if (mapper == null) throw new IllegalArgumentException("mapper == null");
+        JacksonParser.mapper = mapper;
     }
 
     @Override
     public NetworkData<? extends T> parse(Response response) throws IOException {
         try {
             Reader reader = response.responseBody().reader(charsetIfAbsent());
-            T data = GsonParser.gson.fromJson(reader, $Gson$Types.canonicalize(generateType()));
+            T data = mapper.readValue(reader, TypeFactory.defaultInstance().constructType(generateType()));
             if (data != null) {
                 return NetworkData.newSuccess(data);
             }

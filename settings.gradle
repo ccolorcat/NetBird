@@ -1,1 +1,1 @@
-include ':app', ':netbird', ':netbird-cache-support', ':netbird-logging-support', ':netbird-android-support', ':netbird-gson-parser'
+include ':app', ':netbird', ':netbird-cache-support', ':netbird-logging-support', ':netbird-android-support', ':netbird-gson-parser', ':netbird-jackson-parser'

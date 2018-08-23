@@ -16,18 +16,27 @@
 
 package cc.colorcat.netbird;
 
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
+import java.nio.charset.Charset;
+
 /**
  * Author: cxx
- * Date: 2018-8-17
+ * Date: 2018-08-23
  * GitHub: https://github.com/ccolorcat
  */
-final class Version {
+public abstract class JsonParser<T> implements Parser<T> {
 
-    static String userAgent() {
-        return "NetBird/4.2.0";
+    protected final Type generateType() {
+        Type superClass = getClass().getGenericSuperclass();
+        if (superClass instanceof Class) {
+            throw new RuntimeException("Missing type parameter.");
+        }
+        ParameterizedType parameterizedType = (ParameterizedType) superClass;
+        return parameterizedType.getActualTypeArguments()[0];
     }
 
-    private Version() {
-        throw new AssertionError("no instance");
+    protected Charset charsetIfAbsent() {
+        return Utils.UTF8;
     }
 }

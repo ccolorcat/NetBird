@@ -254,16 +254,21 @@ allprojects {
 
 ```groovy
 dependencies {
-    implementation 'com.github.ccolorcat.NetBird:netbird:v4.2.0'
-    implementation 'com.github.ccolorcat.NetBird:netbird-android-support:v4.2.0'
-    implementation 'com.github.ccolorcat.NetBird:netbird-logging-support:v4.2.0'
-    implementation 'com.github.ccolorcat.NetBird:netbird-cache-support:v4.2.0'
-    implementation 'com.github.ccolorcat.NetBird:netbird-gson-parser:v4.2.0'
-    implementation 'com.github.ccolorcat.NetBird:netbird-jackson-parser:v4.2.0'
+    implementation 'com.github.ccolorcat.NetBird:netbird:v4.2.1'
+    implementation 'com.github.ccolorcat.NetBird:netbird-android-support:v4.2.1'
+    implementation 'com.github.ccolorcat.NetBird:netbird-logging-support:v4.2.1'
+    implementation 'com.github.ccolorcat.NetBird:netbird-cache-support:v4.2.1'
+    implementation 'com.github.ccolorcat.NetBird:netbird-gson-parser:v4.2.1'
+    implementation 'com.github.ccolorcat.NetBird:netbird-jackson-parser:v4.2.1'
 }
 ```
 
 ## 5. 版本历史
+
+v4.2.1
+
+> 1. 优化 Headers 和 Parameters，使其结构更加合理。
+> 2. Parameters 添加两个静态方法，便于直接创建 Parameters 实例。
 
 v4.2.0
 

@@ -16,6 +16,7 @@
 
 package cc.colorcat.netbird;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -27,6 +28,31 @@ import java.util.Set;
  * GitHub: https://github.com/ccolorcat
  */
 public class Parameters implements PairReader {
+    public static Parameters ofWithIgnoreNull(List<String> names, List<String> values) {
+        final int ns = names.size(), vs = values.size();
+        if (ns != vs) throw new IllegalArgumentException("names.size(" + ns + ") != values.size(" + vs + ')');
+        if (ns == 0) return Parameters.EMPTY;
+        List<String> newNames = new ArrayList<>(ns);
+        List<String> newValues = new ArrayList<>(ns);
+        for (int i = 0; i < ns; ++i) {
+            String name = names.get(i);
+            String value = values.get(i);
+            if (name == null || value == null) continue;
+            newNames.add(name);
+            newValues.add(value);
+        }
+        return new Parameters(new Pair(newNames, newValues, Pair.CASE_SENSITIVE_ORDER));
+    }
+
+    public static Parameters ofWithIgnoreNull(Map<String, List<String>> namesAndValues) {
+        if (namesAndValues.isEmpty()) return Parameters.EMPTY;
+        Entry<List<String>, List<String>> entries = Utils.unzipWithIgnoreNull(namesAndValues);
+        return new Parameters(new Pair(entries.first, entries.second, Pair.CASE_SENSITIVE_ORDER));
+    }
+
+    static final Parameters EMPTY = new Parameters(Pair.EMPTY_CASE_SENSITIVE);
+
+
     final Pair delegate;
 
     Parameters(Pair delegate) {

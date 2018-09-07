@@ -28,7 +28,7 @@ public final class MutableHeaders extends Headers implements PairWriter {
     public static MutableHeaders create(int initCapacity) {
         List<String> names = new ArrayList<>(initCapacity);
         List<String> values = new ArrayList<>(initCapacity);
-        return new MutableHeaders(new MutablePair(names, values, String.CASE_INSENSITIVE_ORDER));
+        return new MutableHeaders(new MutablePair(names, values, Pair.CASE_INSENSITIVE_ORDER));
     }
 
 

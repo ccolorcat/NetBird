@@ -17,7 +17,6 @@
 package cc.colorcat.netbird;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -29,15 +28,8 @@ public final class MutableParameters extends Parameters implements PairWriter {
     public static MutableParameters create(int initCapacity) {
         List<String> names = new ArrayList<>(initCapacity);
         List<String> values = new ArrayList<>(initCapacity);
-        return new MutableParameters(new MutablePair(names, values, PARAMETERS_COMPARATOR));
+        return new MutableParameters(new MutablePair(names, values, Pair.CASE_SENSITIVE_ORDER));
     }
-
-    private static final Comparator<String> PARAMETERS_COMPARATOR = new Comparator<String>() {
-        @Override
-        public int compare(String o1, String o2) {
-            return o1.compareTo(o2);
-        }
-    };
 
 
     MutableParameters(MutablePair delegate) {

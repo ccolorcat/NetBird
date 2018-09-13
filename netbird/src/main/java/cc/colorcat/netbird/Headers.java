@@ -42,18 +42,19 @@ public class Headers implements PairReader {
             newNames.add(name);
             newValues.add(value);
         }
-        return new Headers(new Pair(newNames, newValues, String.CASE_INSENSITIVE_ORDER));
+        return new Headers(new Pair(newNames, newValues, Pair.CASE_INSENSITIVE_ORDER));
     }
 
     public static Headers ofWithIgnoreNull(Map<String, List<String>> namesAndValues) {
         if (namesAndValues.isEmpty()) return Headers.EMPTY;
-        Entry<List<String>, List<String>> entry = Utils.unzipWithIgnoreNull(namesAndValues);
-        return new Headers(new Pair(entry.first, entry.second, String.CASE_INSENSITIVE_ORDER));
+        Entry<List<String>, List<String>> entries = Utils.unzipWithIgnoreNull(namesAndValues);
+        return new Headers(new Pair(entries.first, entries.second, Pair.CASE_INSENSITIVE_ORDER));
     }
 
-    static final Headers EMPTY = new Headers(Pair.EMPTY);
+    static final Headers EMPTY = new Headers(Pair.EMPTY_CASE_INSENSITIVE);
     public static final String CONTENT_TYPE = "Content-Type";
     public static final String CONTENT_LENGTH = "Content-Length";
+
 
     final Pair delegate;
 

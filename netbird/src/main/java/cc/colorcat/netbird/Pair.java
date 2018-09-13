@@ -32,7 +32,17 @@ import java.util.TreeSet;
  * GitHub: https://github.com/ccolorcat
  */
 class Pair implements PairReader {
-    static final Pair EMPTY = new Pair(Collections.<String>emptyList(), Collections.<String>emptyList(), String.CASE_INSENSITIVE_ORDER);
+    static final Comparator<String> CASE_INSENSITIVE_ORDER = String.CASE_INSENSITIVE_ORDER;
+    static final Comparator<String> CASE_SENSITIVE_ORDER = new Comparator<String>() {
+        @Override
+        public int compare(String o1, String o2) {
+            return o1.compareTo(o2);
+        }
+    };
+
+    static final Pair EMPTY_CASE_INSENSITIVE = new Pair(Collections.<String>emptyList(), Collections.<String>emptyList(), Pair.CASE_INSENSITIVE_ORDER);
+    static final Pair EMPTY_CASE_SENSITIVE = new Pair(Collections.<String>emptyList(), Collections.<String>emptyList(), Pair.CASE_SENSITIVE_ORDER);
+
 
     final List<String> names;
     final List<String> values;

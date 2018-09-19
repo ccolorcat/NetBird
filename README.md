@@ -23,7 +23,7 @@
 | netbird-cache-support   | 提供自定义缓存支持。                     |
 | netbird-gson-parser     | 提供 Gson 数据解析支持。                 |
 | netbird-jackson-parser  | 提供 Jackson 数据解析支持。              |
-| netbird-jackson-parser  | 提供 fastjson 数据解析支持。             |
+| netbird-fastjson-parser | 提供 fastjson 数据解析支持。             |
 
 ## 3. 用法举例
 

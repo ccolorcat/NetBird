@@ -36,6 +36,15 @@ public abstract class JsonParser<T> implements Parser<T> {
         return parameterizedType.getActualTypeArguments()[0];
     }
 
+    protected final Type[] generateTypes() {
+        Type superClass = getClass().getGenericSuperclass();
+        if (superClass instanceof Class) {
+            throw new RuntimeException("Missing type parameter.");
+        }
+        ParameterizedType parameterizedType = (ParameterizedType) superClass;
+        return parameterizedType.getActualTypeArguments();
+    }
+
     protected Charset charsetIfAbsent() {
         return Utils.UTF8;
     }

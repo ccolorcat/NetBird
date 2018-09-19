@@ -23,6 +23,7 @@
 | netbird-cache-support   | 提供自定义缓存支持。                     |
 | netbird-gson-parser     | 提供 Gson 数据解析支持。                 |
 | netbird-jackson-parser  | 提供 Jackson 数据解析支持。              |
+| netbird-jackson-parser  | 提供 fastjson 数据解析支持。             |
 
 ## 3. 用法举例
 
@@ -254,16 +255,22 @@ allprojects {
 
 ```groovy
 dependencies {
-    implementation 'com.github.ccolorcat.NetBird:netbird:v4.2.1'
-    implementation 'com.github.ccolorcat.NetBird:netbird-android-support:v4.2.1'
-    implementation 'com.github.ccolorcat.NetBird:netbird-logging-support:v4.2.1'
-    implementation 'com.github.ccolorcat.NetBird:netbird-cache-support:v4.2.1'
-    implementation 'com.github.ccolorcat.NetBird:netbird-gson-parser:v4.2.1'
-    implementation 'com.github.ccolorcat.NetBird:netbird-jackson-parser:v4.2.1'
+    implementation 'com.github.ccolorcat.NetBird:netbird:v4.3.0'
+    implementation 'com.github.ccolorcat.NetBird:netbird-android-support:v4.3.0'
+    implementation 'com.github.ccolorcat.NetBird:netbird-logging-support:v4.3.0'
+    implementation 'com.github.ccolorcat.NetBird:netbird-cache-support:v4.3.0'
+    implementation 'com.github.ccolorcat.NetBird:netbird-gson-parser:v4.3.0'
+    implementation 'com.github.ccolorcat.NetBird:netbird-jackson-parser:v4.3.0'
+    implementation 'com.github.ccolorcat.NetBird:netbird-fastjson-parser:v4.3.0'
 }
 ```
 
 ## 5. 版本历史
+
+v4.3.0
+
+> 1. JsonPaser 添加获取 Type[] 的方法。
+> 2. 添加 fastjson 解析的支持。
 
 v4.2.1
 

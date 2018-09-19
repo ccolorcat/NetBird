@@ -244,7 +244,7 @@ public class ResultParser<T> implements Parser<T> {
 
 ```groovy
 allprojects {
-    epositories {
+    repositories {
         ...
         maven { url 'https://jitpack.io' }
     }

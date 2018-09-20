@@ -36,4 +36,12 @@ dependencies {
     androidTestImplementation rootProject.ext.testRunner
     androidTestImplementation rootProject.ext.testEspresso
     testImplementation rootProject.ext.junit
+    implementation project(':netbird')
+    implementation project(':netbird-android-support')
+    implementation project(':netbird-cache-support')
+    implementation project(':netbird-fastjson-parser')
+    implementation project(':netbird-gson-parser')
+    implementation project(':netbird-jackson-parser')
+    implementation project(':netbird-logging-support')
+    implementation 'com.google.code.gson:gson:2.8.5'
 }

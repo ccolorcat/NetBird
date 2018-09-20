@@ -52,12 +52,26 @@ public class AndroidLogger implements Logger {
     }
 
     protected void println(String tag, String msg, int priority) {
-        for (int start = 0, end = start + MAX_LENGTH, size = msg.length(); start < size; start = end, end = start + MAX_LENGTH) {
-            if (end >= size) {
-                Log.println(priority, tag, msg.substring(start));
-            } else {
-                Log.println(priority, tag, msg.substring(start, end));
+        final int length = msg.length();
+        if (length <= MAX_LENGTH) {
+            Log.println(priority, tag, msg);
+            return;
+        }
+        for (int start = 0, end; start < length; start = end) {
+            end = friendlyEnd(msg, start, Math.min(start + MAX_LENGTH, length));
+            Log.println(priority, tag, msg.substring(start, end));
+        }
+    }
+
+    protected static int friendlyEnd(String msg, int start, int end) {
+        if (msg.length() == end || msg.charAt(end) == '\n') {
+            return end;
+        }
+        for (int last = end - 1; last > start; --last) {
+            if (msg.charAt(last) == '\n') {
+                return last + 1;
             }
         }
+        return end;
     }
 }

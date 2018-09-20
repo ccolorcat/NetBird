@@ -29,7 +29,7 @@ import cc.colorcat.netbird.HttpConnection;
  * Created by cxx on 2018/1/28.
  * xx.ch@outlook.com
  */
-final class AndroidHttpConnection extends HttpConnection {
+public final class AndroidHttpConnection extends HttpConnection {
 
     @SuppressWarnings("CloneDoesntCallSuperClone")
     @Override

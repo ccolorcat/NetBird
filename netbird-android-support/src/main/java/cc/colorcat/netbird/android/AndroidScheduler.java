@@ -25,7 +25,7 @@ import cc.colorcat.netbird.Scheduler;
  * Created by cxx on 2018/1/28.
  * xx.ch@outlook.com
  */
-final class AndroidScheduler implements Scheduler {
+public final class AndroidScheduler implements Scheduler {
     private final Handler handler = new Handler(Looper.getMainLooper());
 
     @Override

@@ -25,8 +25,8 @@ import cc.colorcat.netbird.Logger;
  * Created by cxx on 2018/1/28.
  * xx.ch@outlook.com
  */
-final class AndroidLogger implements Logger {
-    private static final int MAX_LENGTH = 1024 * 4;
+public class AndroidLogger implements Logger {
+    protected static final int MAX_LENGTH = 1024 * 2;
 
     @Override
     public void log(String tag, String msg, Level level) {
@@ -51,7 +51,7 @@ final class AndroidLogger implements Logger {
         }
     }
 
-    private static void println(String tag, String msg, int priority) {
+    protected void println(String tag, String msg, int priority) {
         for (int start = 0, end = start + MAX_LENGTH, size = msg.length(); start < size; start = end, end = start + MAX_LENGTH) {
             if (end >= size) {
                 Log.println(priority, tag, msg.substring(start));

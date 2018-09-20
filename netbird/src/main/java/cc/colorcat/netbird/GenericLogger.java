@@ -25,7 +25,7 @@ import java.util.logging.LogRecord;
  * Date: 2018-8-17
  * GitHub: https://github.com/ccolorcat
  */
-final class GenericLogger implements Logger {
+public final class GenericLogger implements Logger {
     private static final java.util.logging.Logger logger;
 
     static {

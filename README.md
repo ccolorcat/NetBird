@@ -255,21 +255,25 @@ allprojects {
 
 ```groovy
 dependencies {
-    implementation 'com.github.ccolorcat.NetBird:netbird:v4.3.0'
-    implementation 'com.github.ccolorcat.NetBird:netbird-android-support:v4.3.0'
-    implementation 'com.github.ccolorcat.NetBird:netbird-logging-support:v4.3.0'
-    implementation 'com.github.ccolorcat.NetBird:netbird-cache-support:v4.3.0'
-    implementation 'com.github.ccolorcat.NetBird:netbird-gson-parser:v4.3.0'
-    implementation 'com.github.ccolorcat.NetBird:netbird-jackson-parser:v4.3.0'
-    implementation 'com.github.ccolorcat.NetBird:netbird-fastjson-parser:v4.3.0'
+    implementation 'com.github.ccolorcat.NetBird:netbird:v4.3.1'
+    implementation 'com.github.ccolorcat.NetBird:netbird-android-support:v4.3.1'
+    implementation 'com.github.ccolorcat.NetBird:netbird-logging-support:v4.3.1'
+    implementation 'com.github.ccolorcat.NetBird:netbird-cache-support:v4.3.1'
+    implementation 'com.github.ccolorcat.NetBird:netbird-gson-parser:v4.3.1'
+    implementation 'com.github.ccolorcat.NetBird:netbird-jackson-parser:v4.3.1'
+    implementation 'com.github.ccolorcat.NetBird:netbird-fastjson-parser:v4.3.1'
 }
 ```
 
 ## 5. 版本历史
 
+v4.3.1
+
+> 1. 修复可能导致 FastjsonParser 被错用的问题。
+
 v4.3.0
 
-> 1. JsonPaser 添加获取 Type[] 的方法。
+> 1. JsonParser 添加获取 Type[] 的方法。
 > 2. 添加 fastjson 解析的支持。
 
 v4.2.1

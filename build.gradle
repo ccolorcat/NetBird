@@ -45,8 +45,8 @@ project.ext {
     // android.defaultConfig
     minSdkVersion = 15
     targetSdkVersion = sdkVersion
-    versionCode = 9
-    versionName = "4.3.0"
+    versionCode = 10
+    versionName = "4.3.1"
 
     // dependencies
     supportAppcompat = "com.android.support:appcompat-v7:${supportVersion}"

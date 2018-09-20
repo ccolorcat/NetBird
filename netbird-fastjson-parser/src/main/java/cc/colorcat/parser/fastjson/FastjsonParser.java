@@ -30,7 +30,7 @@ import cc.colorcat.netbird.StateIOException;
  * Date: 2018-09-19
  * GitHub: https://github.com/ccolorcat
  */
-public class FastjsonParser<T> extends JsonParser<T> {
+public abstract class FastjsonParser<T> extends JsonParser<T> {
     @Override
     public NetworkData<? extends T> parse(Response response) throws IOException {
         try {

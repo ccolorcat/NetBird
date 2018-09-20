@@ -84,7 +84,7 @@ public class LoggingTailInterceptor implements Interceptor {
                 Charset charset = body.charset();
                 if (charset == null) charset = charsetIfAbsent;
                 final String content = new String(bytes, charset);
-                builder.append("\nresponse content --> ").append(deUnicode ? decode(content) : content);
+                builder.append("\nresponse content --> ").append(formatResponse(deUnicode ? decode(content) : content, contentType));
                 final ResponseBody newBody = ResponseBody.create(bytes, contentType, charset);
                 response = response.newBuilder()
                         .setHeader(Headers.CONTENT_LENGTH, Long.toString(newBody.contentLength()))
@@ -99,6 +99,10 @@ public class LoggingTailInterceptor implements Interceptor {
 
     protected boolean contentFilter(String contentType) {
         return contentType.matches(".*(charset|text|html|htm|json|urlencoded)+.*");
+    }
+
+    protected String formatResponse(String content, String contentType) {
+        return content;
     }
 
     private static void appendPair(StringBuilder builder, String prefix, PairReader reader) {

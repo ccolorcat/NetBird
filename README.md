@@ -255,17 +255,21 @@ allprojects {
 
 ```groovy
 dependencies {
-    implementation 'com.github.ccolorcat.NetBird:netbird:v4.3.1'
-    implementation 'com.github.ccolorcat.NetBird:netbird-android-support:v4.3.1'
-    implementation 'com.github.ccolorcat.NetBird:netbird-logging-support:v4.3.1'
-    implementation 'com.github.ccolorcat.NetBird:netbird-cache-support:v4.3.1'
-    implementation 'com.github.ccolorcat.NetBird:netbird-gson-parser:v4.3.1'
-    implementation 'com.github.ccolorcat.NetBird:netbird-jackson-parser:v4.3.1'
-    implementation 'com.github.ccolorcat.NetBird:netbird-fastjson-parser:v4.3.1'
+    implementation 'com.github.ccolorcat.NetBird:netbird:v4.3.2'
+    implementation 'com.github.ccolorcat.NetBird:netbird-android-support:v4.3.2'
+    implementation 'com.github.ccolorcat.NetBird:netbird-logging-support:v4.3.2'
+    implementation 'com.github.ccolorcat.NetBird:netbird-cache-support:v4.3.2'
+    implementation 'com.github.ccolorcat.NetBird:netbird-gson-parser:v4.3.2'
+    implementation 'com.github.ccolorcat.NetBird:netbird-jackson-parser:v4.3.2'
+    implementation 'com.github.ccolorcat.NetBird:netbird-fastjson-parser:v4.3.2'
 }
 ```
 
 ## 5. 版本历史
+
+v4.3.2
+
+> 1. LoggingTailInterceptor 添加格式化响应内容的支持。
 
 v4.3.1
 

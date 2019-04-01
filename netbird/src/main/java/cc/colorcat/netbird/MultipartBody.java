@@ -96,7 +96,7 @@ final class MultipartBody extends RequestBody {
         for (int i = 0, size = fileBodies.size(); i < size; ++i) {
             FileBody body = fileBodies.get(i);
             long contentLength = body.contentLength();
-            if (contentLength != -1) {
+            if (contentLength != -1L) {
                 bos.write(DASH_DASH);
                 bos.writeUtf8(boundary);
                 bos.write(CRLF);

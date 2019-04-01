@@ -7,7 +7,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.2.0'
+        classpath 'com.android.tools.build:gradle:3.3.2'
         // jitPack
         classpath 'com.github.dcendents:android-maven-gradle-plugin:1.5'
 
@@ -36,8 +36,8 @@ project.ext {
 
     jitPackGroup = 'com.github.ccolorcat'
 
-    def sdkVersion = 27
-    def supportVersion = "27.1.1"
+    def sdkVersion = 28
+    def supportVersion = "28.0.0"
 
     // android
     compileSdkVersion = sdkVersion

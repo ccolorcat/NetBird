@@ -28,12 +28,7 @@ import java.nio.charset.Charset;
 public abstract class JsonParser<T> implements Parser<T> {
 
     protected final Type generateType() {
-        Type superClass = getClass().getGenericSuperclass();
-        if (superClass instanceof Class) {
-            throw new RuntimeException("Missing type parameter.");
-        }
-        ParameterizedType parameterizedType = (ParameterizedType) superClass;
-        return parameterizedType.getActualTypeArguments()[0];
+        return this.generateTypes()[0];
     }
 
     protected final Type[] generateTypes() {

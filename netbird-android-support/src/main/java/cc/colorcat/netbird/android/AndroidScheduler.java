@@ -30,7 +30,7 @@ public final class AndroidScheduler implements Scheduler {
 
     @Override
     public boolean isTargetThread() {
-        return Looper.getMainLooper() == Looper.myLooper();
+        return Looper.getMainLooper().getThread() == Thread.currentThread();
     }
 
     @Override

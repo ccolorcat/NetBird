@@ -41,7 +41,7 @@ import cc.colorcat.netbird.ResponseBody;
  */
 public class LoggingTailInterceptor implements Interceptor {
     private static final String TAG = NetBird.class.getSimpleName();
-    private static final String LINE = buildString(80, '-');
+    private static final String LINE = buildString(94, '-');
     private static final String HALF_LINE = buildString(38, '-');
     private final Charset charsetIfAbsent;
     private final boolean deUnicode;
@@ -62,10 +62,15 @@ public class LoggingTailInterceptor implements Interceptor {
     @Override
     public final Response intercept(Chain chain) throws IOException {
         final Request request = chain.request();
+        long start = System.currentTimeMillis();
         Response response = chain.proceed(request);
+        long elapse = System.currentTimeMillis() - start;
 
         final StringBuilder builder = new StringBuilder();
-        builder.append(" \n").append(HALF_LINE).append(request.method().name()).append(HALF_LINE)
+        builder.append(" \n").append(HALF_LINE)
+                .append(' ').append(request.method().name())
+                .append(" (").append(elapse).append(" millis) ")
+                .append(HALF_LINE).append('>')
                 .append("\nrequest url --> ").append(request.url());
         appendPair(builder, "request header --> ", request.headers());
 
@@ -92,7 +97,7 @@ public class LoggingTailInterceptor implements Interceptor {
                         .build();
             }
         }
-        builder.append('\n').append(LINE);
+        builder.append('\n').append('<').append(LINE);
         Platform.get().logger().log(TAG, builder.toString(), Level.INFO);
         return response;
     }

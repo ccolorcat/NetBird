@@ -77,7 +77,7 @@ final class RealCall implements Call {
 
     @Override
     public <T> void enqueue(Parser<? extends T> parser, Listener<? super T> listener) {
-        enqueue(CallbackWrapper.create(parser, listener));
+        enqueue(ProxyCallback.create(parser, listener));
     }
 
     private Response getResponseWithInterceptorChain() throws IOException {

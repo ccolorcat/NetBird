@@ -23,18 +23,18 @@ import java.io.IOException;
  * Date: 2019-12-24
  * GitHub: https://github.com/ccolorcat
  */
-final class CallbackWrapper<T> implements Callback {
-    static <T> CallbackWrapper<T> create(Parser<? extends T> parser, Listener<? super T> listener) {
+final class ProxyCallback<T> implements Callback {
+    static <T> ProxyCallback<T> create(Parser<? extends T> parser, Listener<? super T> listener) {
         Utils.requireNonNull(parser, "parser == null");
         Utils.requireNonNull(listener, "listener == null");
-        return new CallbackWrapper<>(parser, listener);
+        return new ProxyCallback<>(parser, listener);
     }
 
     private final Parser<? extends T> parser;
     private final Listener<? super T> listener;
     private NetworkData<? extends T> networkData;
 
-    private CallbackWrapper(Parser<? extends T> parser, Listener<? super T> listener) {
+    private ProxyCallback(Parser<? extends T> parser, Listener<? super T> listener) {
         this.parser = parser;
         this.listener = listener;
     }

@@ -12,7 +12,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import cc.colorcat.netbird.Level;
-import cc.colorcat.netbird.MRequest;
 import cc.colorcat.netbird.NetBird;
 import cc.colorcat.netbird.Request;
 import cc.colorcat.netbird.StringParser;
@@ -68,12 +67,12 @@ public class ExampleInstrumentedTest {
 
     @Test
     public void testImooc() throws Exception {
-        MRequest<String> request = new MRequest.Builder<>(StringParser.getDefault())
+        Request request = new Request.Builder()
                 .url("http://www.imooc.com/api/teacher")
                 .add("type", "4")
                 .add("num", "30")
                 .get()
                 .build();
-        BIRD.execute(request);
+        BIRD.newCall(request).execute(StringParser.getDefault());
     }
 }

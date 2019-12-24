@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 cxx
+ * Copyright 2019 cxx
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,33 +16,17 @@
 
 package cc.colorcat.netbird;
 
-import java.io.IOException;
-
 /**
  * Author: cxx
- * Date: 2018-8-17
+ * Date: 2019-12-24
  * GitHub: https://github.com/ccolorcat
  */
-public interface Call extends Cloneable {
+public interface Listener<R> {
+    void onStart();
 
-    Request request();
+    void onSuccess(R result);
 
-    Response execute() throws IOException;
+    void onFailure(StateIOException cause);
 
-    <T> T execute(Parser<? extends T> parser) throws IOException;
-
-    void enqueue(Callback callback);
-
-    <T> void enqueue(Parser<? extends T> parser, Listener<? super T> listener);
-
-    void cancel();
-
-    boolean canceled();
-
-    Call clone();
-
-    interface Factory {
-
-        Call newCall(Request request);
-    }
+    void onFinish();
 }

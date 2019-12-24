@@ -8,11 +8,14 @@ import org.junit.Test;
 import java.io.IOException;
 import java.util.List;
 
+import cc.colorcat.netbird.Call;
 import cc.colorcat.netbird.GenericPlatform;
-import cc.colorcat.netbird.MRequest;
+import cc.colorcat.netbird.Listener;
 import cc.colorcat.netbird.NetBird;
 import cc.colorcat.netbird.Parser;
 import cc.colorcat.netbird.Platform;
+import cc.colorcat.netbird.Request;
+import cc.colorcat.netbird.StateIOException;
 import cc.colorcat.netbird.logging.LoggingTailInterceptor;
 
 /**
@@ -39,14 +42,53 @@ public class ExampleUnitTest {
     @Test
     public void testMooc() throws IOException {
         Parser<List<Course>> parser = new ResultParser<List<Course>>(GSON) {};
-        MRequest<List<Course>> request = new MRequest.Builder<>(parser)
+        Request request = new Request.Builder()
                 .path("api/teacher")
                 .add("num", "30")
                 .add("type", "4")
                 .get()
                 .build();
 
-        List<Course> result = BIRD.execute(request);
-        System.out.println(result);
+        final Call call = BIRD.newCall(request);
+//        List<Course> result = call.execute(parser);
+//        System.out.println(result);
+        call.enqueue(parser, new Listener<List<Course>>() {
+            @Override
+            public void onStart() {
+
+            }
+
+            @Override
+            public void onSuccess(List<Course> result) {
+                System.out.println(result);
+            }
+
+            @Override
+            public void onFailure(StateIOException cause) {
+                cause.printStackTrace();
+            }
+
+            @Override
+            public void onFinish() {
+                goon();
+            }
+        });
+        block();
+    }
+
+    private static void block() {
+        synchronized (BIRD) {
+            try {
+                BIRD.wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private static void goon() {
+        synchronized (BIRD) {
+            BIRD.notify();
+        }
     }
 }

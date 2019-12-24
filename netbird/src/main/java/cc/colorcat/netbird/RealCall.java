@@ -58,10 +58,26 @@ final class RealCall implements Call {
     }
 
     @Override
+    public <T> T execute(Parser<? extends T> parser) throws IOException {
+        Utils.requireNonNull(parser, "parser == null");
+        Response response = execute();
+        NetworkData<? extends T> networkData = parser.parse(response);
+        if (networkData.isSuccess) {
+            return networkData.data;
+        }
+        throw networkData.cause;
+    }
+
+    @Override
     public void enqueue(Callback callback) {
         if (executed.getAndSet(true)) throw new IllegalStateException("Already executed");
         callback.onStart();
         netBird.dispatcher.enqueue(new AsyncCall(callback));
+    }
+
+    @Override
+    public <T> void enqueue(Parser<? extends T> parser, Listener<? super T> listener) {
+        enqueue(CallbackWrapper.create(parser, listener));
     }
 
     private Response getResponseWithInterceptorChain() throws IOException {

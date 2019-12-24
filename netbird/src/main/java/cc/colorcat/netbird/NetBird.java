@@ -17,7 +17,6 @@
 package cc.colorcat.netbird;
 
 import java.io.File;
-import java.io.IOException;
 import java.net.Proxy;
 import java.util.ArrayList;
 import java.util.List;
@@ -77,19 +76,6 @@ public final class NetBird implements Call.Factory {
     @Override
     public Call newCall(Request request) {
         return new RealCall(this, request);
-    }
-
-    public <T> T execute(MRequest<T> request) throws IOException {
-        final Response response = newCall(request).execute();
-        if (response.code == 200 && response.responseBody != null) {
-            return request.parser.parse(response).data;
-        }
-        return null;
-    }
-
-    public <T> Object send(MRequest<T> request) {
-        newCall(request).enqueue(new MCallback<>(request.parser, request.listener));
-        return request.tag;
     }
 
     public void cancelWaiting(Object tag) {

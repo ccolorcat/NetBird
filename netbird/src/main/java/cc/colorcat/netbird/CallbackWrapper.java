@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 cxx
+ * Copyright 2019 cxx
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,15 +20,21 @@ import java.io.IOException;
 
 /**
  * Author: cxx
- * Date: 2018-8-17
+ * Date: 2019-12-24
  * GitHub: https://github.com/ccolorcat
  */
-final class MCallback<T> implements Callback {
+final class CallbackWrapper<T> implements Callback {
+    static <T> CallbackWrapper<T> create(Parser<? extends T> parser, Listener<? super T> listener) {
+        Utils.requireNonNull(parser, "parser == null");
+        Utils.requireNonNull(listener, "listener == null");
+        return new CallbackWrapper<>(parser, listener);
+    }
+
     private final Parser<? extends T> parser;
-    private final MRequest.Listener<? super T> listener;
+    private final Listener<? super T> listener;
     private NetworkData<? extends T> networkData;
 
-    MCallback(Parser<? extends T> parser, MRequest.Listener<? super T> listener) {
+    private CallbackWrapper(Parser<? extends T> parser, Listener<? super T> listener) {
         this.parser = parser;
         this.listener = listener;
     }
@@ -61,7 +67,7 @@ final class MCallback<T> implements Callback {
 
     @Override
     public void onFailure(Call call, StateIOException cause) {
-        networkData = NetworkData.newFailure(cause.state, Utils.nullElse(cause.getMessage(), ""));
+        networkData = NetworkData.newFailure(cause);
     }
 
     @Override
@@ -84,7 +90,7 @@ final class MCallback<T> implements Callback {
         if (networkData.isSuccess) {
             listener.onSuccess(networkData.data);
         } else {
-            listener.onFailure(networkData.code, networkData.msg);
+            listener.onFailure(networkData.cause);
         }
         listener.onFinish();
     }

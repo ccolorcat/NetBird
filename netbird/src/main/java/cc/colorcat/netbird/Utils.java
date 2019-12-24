@@ -50,6 +50,11 @@ final class Utils {
         return Collections.unmodifiableList(new ArrayList<>(list));
     }
 
+    static <T> T requireNonNull(T t, String msg) {
+        if (t == null) throw new NullPointerException(msg);
+        return t;
+    }
+
     static <T> T nullElse(T value, T other) {
         return value != null ? value : other;
     }

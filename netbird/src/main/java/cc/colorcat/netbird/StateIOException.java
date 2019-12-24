@@ -23,7 +23,7 @@ import java.io.IOException;
  * Date: 2018-8-17
  * GitHub: https://github.com/ccolorcat
  */
-public final class StateIOException extends IOException {
+public class StateIOException extends IOException {
     int state;
 
     public StateIOException(int state, String message) {

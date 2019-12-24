@@ -25,53 +25,36 @@ public final class NetworkData<T> {
 
     public static <T> NetworkData<? extends T> newSuccess(T data) {
         if (data == null) throw new IllegalArgumentException("data == null");
-        return new NetworkData<>(200, "ok", data);
+        return new NetworkData<>(data, null);
     }
 
     public static <T> NetworkData<? extends T> newFailure(int code, String msg) {
         if (msg == null) throw new IllegalArgumentException("msg == null");
-        return new NetworkData<>(code, msg, null);
+        return new NetworkData<>(null, new StateIOException(code, msg));
+    }
+
+    public static <T> NetworkData<? extends T> newFailure(StateIOException cause) {
+        Utils.requireNonNull(cause, "cause == null");
+        return new NetworkData<>(null, cause);
     }
 
     public final int code;
     public final String msg;
     public final T data;
     public final boolean isSuccess;
+    public final StateIOException cause;
 
-    private NetworkData(int code, String msg, T data) {
-        this.code = code;
-        this.msg = msg;
+    private NetworkData(T data, StateIOException cause) {
         this.data = data;
+        this.cause = cause;
         this.isSuccess = (this.data != null);
+        if (isSuccess) {
+            code = 200;
+            msg = "ok";
+        } else {
+            code = cause.state;
+            msg = cause.getMessage();
+        }
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        NetworkData<?> that = (NetworkData<?>) o;
-
-        if (code != that.code) return false;
-        if (!msg.equals(that.msg)) return false;
-        return data != null ? data.equals(that.data) : that.data == null;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = code;
-        result = 31 * result + msg.hashCode();
-        result = 31 * result + (data != null ? data.hashCode() : 0);
-        return result;
-    }
-
-    @Override
-    public String toString() {
-        return "NetworkData{" +
-                "code=" + code +
-                ", msg='" + msg + '\'' +
-                ", data=" + data +
-                ", isSuccess=" + isSuccess +
-                '}';
-    }
 }

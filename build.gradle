@@ -37,19 +37,17 @@ project.ext {
     jitPackGroup = 'com.github.ccolorcat'
 
     def sdkVersion = 28
-    def supportVersion = "28.0.0"
 
     // android
     compileSdkVersion = sdkVersion
 
     // android.defaultConfig
-    minSdkVersion = 15
+    minSdkVersion = 9
     targetSdkVersion = sdkVersion
     versionCode = 14
     versionName = "4.3.5"
 
     // dependencies
-    supportAppcompat = "com.android.support:appcompat-v7:${supportVersion}"
     testRunner = "com.android.support.test:runner:1.0.2"
     testEspresso = 'com.android.support.test.espresso:espresso-core:3.0.2'
     junit = 'junit:junit:4.12'

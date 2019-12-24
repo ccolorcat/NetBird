@@ -386,7 +386,7 @@ public class Request {
         }
 
         public Builder addFile(String name, String contentType, File file, UploadListener listener) {
-            this.fileBodies.add(FileBody.create(name, contentType, file, MUploadListener.wrap(listener)));
+            this.fileBodies.add(FileBody.create(name, contentType, file, FilterUploadListener.of(listener)));
             return this;
         }
 
@@ -442,7 +442,7 @@ public class Request {
         }
 
         public Builder downloadListener(DownloadListener listener) {
-            this.downloadListener = MDownloadListener.wrap(listener);
+            this.downloadListener = FilterDownloadListener.of(listener);
             return this;
         }
 

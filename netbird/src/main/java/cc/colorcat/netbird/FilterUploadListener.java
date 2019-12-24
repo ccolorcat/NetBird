@@ -21,14 +21,14 @@ package cc.colorcat.netbird;
  * Date: 2018-8-17
  * GitHub: https://github.com/ccolorcat
  */
-final class MUploadListener implements UploadListener {
-    static UploadListener wrap(UploadListener listener) {
-        return listener != null ? new MUploadListener(listener) : null;
+final class FilterUploadListener implements UploadListener {
+    static UploadListener of(UploadListener listener) {
+        return listener != null ? new FilterUploadListener(listener) : null;
     }
 
     private final UploadListener listener;
 
-    private MUploadListener(UploadListener listener) {
+    private FilterUploadListener(UploadListener listener) {
         this.listener = listener;
     }
 

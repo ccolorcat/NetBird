@@ -21,14 +21,14 @@ package cc.colorcat.netbird;
  * Date: 2018-8-17
  * GitHub: https://github.com/ccolorcat
  */
-final class MDownloadListener implements DownloadListener {
-    static DownloadListener wrap(DownloadListener listener) {
-        return listener != null ? new MDownloadListener(listener) : null;
+final class FilterDownloadListener implements DownloadListener {
+    static DownloadListener of(DownloadListener listener) {
+        return listener != null ? new FilterDownloadListener(listener) : null;
     }
 
     private final DownloadListener listener;
 
-    private MDownloadListener(DownloadListener listener) {
+    private FilterDownloadListener(DownloadListener listener) {
         this.listener = listener;
     }
 

@@ -175,12 +175,16 @@ final class RealCall implements Call {
                 }
             } catch (IOException e) {
                 Log.e(e);
-                if (msg == null) {
-                    msg = Utils.nullElse(e.getMessage(), HttpStatus.MSG_CONNECT_ERROR);
+                if (e instanceof StateIOException) {
+                    callback.onFailure(RealCall.this, (StateIOException) e);
                 } else {
-                    msg = "Response msg = " + msg + "\n Exception detail = " + e.toString();
+                    if (msg == null) {
+                        msg = Utils.nullElse(e.getMessage(), HttpStatus.MSG_CONNECT_ERROR);
+                    } else {
+                        msg = "Response msg = " + msg + "\n Exception detail = " + e.toString();
+                    }
+                    callback.onFailure(RealCall.this, new StateIOException(code, msg, e));
                 }
-                callback.onFailure(RealCall.this, new StateIOException(code, msg, e));
             } finally {
                 callback.onFinish();
                 netBird.dispatcher.finished(this);

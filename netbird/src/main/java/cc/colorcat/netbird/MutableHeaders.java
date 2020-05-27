@@ -51,7 +51,7 @@ public final class MutableHeaders extends Headers implements PairWriter {
     @Override
     public void addIfNot(String name, String value) {
         checkNameAndValue(name, value);
-        cast().add(name, value);
+        cast().addIfNot(name, value);
     }
 
     @Override

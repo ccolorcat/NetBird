@@ -44,8 +44,8 @@ project.ext {
     // android.defaultConfig
     minSdkVersion = 9
     targetSdkVersion = sdkVersion
-    versionCode = 20
-    versionName = "5.0.0"
+    versionCode = 21
+    versionName = "5.0.1"
 
     // dependencies
     testRunner = "com.android.support.test:runner:1.0.2"

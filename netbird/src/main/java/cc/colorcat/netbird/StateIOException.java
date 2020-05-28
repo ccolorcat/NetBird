@@ -24,7 +24,7 @@ import java.io.IOException;
  * GitHub: https://github.com/ccolorcat
  */
 public class StateIOException extends IOException {
-    int state;
+    final int state;
 
     public StateIOException(int state, String message) {
         super(message);
